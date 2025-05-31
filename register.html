@@ -49,21 +49,28 @@
   <script src="firebase-config.js"></script>
 
   <script>
-    const auth = firebase.auth();
+  const auth = firebase.auth();
 
-    function registerUser() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const messageEl = document.getElementById("message");
+  function registerUser() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const messageEl = document.getElementById("message");
 
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          messageEl.textContent = "✅ Account created successfully!";
-        })
-        .catch((error) => {
-          messageEl.textContent = "❌ " + error.message;
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // ✅ Send email verification
+        user.sendEmailVerification().then(() => {
+          messageEl.textContent = "✅ Account created. Check your email to verify!";
         });
-    }
-  </script>
+
+      })
+      .catch((error) => {
+        messageEl.textContent = "❌ " + error.message;
+      });
+  }
+</script>
+  
 </body>
 </html>

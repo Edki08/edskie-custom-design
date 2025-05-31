@@ -1,10 +1,22 @@
-<!-- index.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="background.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="background.js"></script>
+  <script type="module" src="music.js"></script>
+  <script>
+    function createShirtEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("falling-shirt");
+      emoji.innerText = "👕";
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }
+    setInterval(createShirtEmoji, 400);
+  </script>
 </head>
 <body>
   <header>
@@ -45,10 +57,9 @@
   </section>  <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-  </footer>  <script>
-    if (!window.musicPlayerOpened) {
-      const win = window.open("music-player.html", "musicPlayer", "width=300,height=120");
-      window.musicPlayerOpened = true;
+  </footer>  <!-- Music Player Popup Window -->  <script>
+    if (!window.musicWindow || window.musicWindow.closed) {
+      window.musicWindow = window.open("music-player.html", "musicPlayer", "width=300,height=100,left=10,top=10");
     }
   </script></body>
 </html>

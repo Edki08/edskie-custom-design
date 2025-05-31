@@ -2,30 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Edskie Custom Design</title>
   <link rel="stylesheet" href="style.css" />
   <script src="background.js" defer></script>
-  <script type="module" src="login-auth.js" defer></script>
+  <script src="music.js" defer></script>
 </head>
 <body>
   <header>
     <h1>Login</h1>
+    <p>Welcome back to Edskie Custom Design</p>
   </header>
 
-  <main class="content">
-    <form id="login-form">
-      <input type="email" id="login-email" placeholder="Email" required /><br />
-      <input type="password" id="login-password" placeholder="Password" required /><br />
-      <button type="submit">Login</button>
-    </form>
-    <p id="login-message"></p>
-    <p>Don't have an account? <a href="register.html">Register here</a></p>
-  </main>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="auth-form">
+    <input type="email" id="loginEmail" placeholder="Email" /><br>
+    <input type="password" id="loginPassword" placeholder="Password" /><br>
+    <button onclick="loginUser()">Login</button>
+    <p><a href="password-reset.html">Forgot password?</a></p>
+    <p id="loginMessage"></p>
+  </section>
 
   <footer>
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
   </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.loginUser = function () {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "profile.html";
+        })
+        .catch((error) => {
+          document.getElementById("loginMessage").innerText = "Error: " + error.message;
+        });
+    };
+  </script>
 </body>
 </html>

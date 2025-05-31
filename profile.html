@@ -1,1 +1,58 @@
-<!DOCTYPE html><html><head><title>Profile</title></head><body><h1>Profile</h1></body></html>
+<!-- Each page includes:
+1. API-generated background
+2. Background music with controls
+3. Falling shirt emoji animation
+4. Nav + Footer --><!-- === profile.html === --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | Edskie Custom Design</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-size: cover; background-position: center; color: white; overflow-x: hidden; }
+    header { background: linear-gradient(90deg, #ff00cc, #3333ff); text-align: center; padding: 20px; }
+    nav { background-color: #000; display: flex; justify-content: center; gap: 20px; padding: 10px 0; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    main { padding: 20px; text-align: center; }
+    .falling-shirt { position: fixed; font-size: 20px; animation: fall 10s linear infinite; top: -50px; }
+    @keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(360deg); } }
+    footer { text-align: center; padding: 10px; background: #000; }
+    footer a { color: #7cf; margin: 0 10px; text-decoration: none; }
+    .music-player { position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 8px; z-index: 1000; }
+    .music-player label { display: block; font-size: 12px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <header><h1>Your Profile</h1><p>Manage your account and preferences.</p></header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="profile.html">Profile</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <main>
+    <h2>Account Settings Coming Soon</h2>
+  </main>
+  <div class="music-player">
+    <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-summer.mp3" autoplay loop></audio>
+    <input type="range" min="0" max="1" step="0.01" value="0.3" onchange="document.getElementById('bgMusic').volume = this.value" />
+    <label>Now Playing: “Summer” by <a href="https://www.bensound.com" target="_blank" style="color: #7cf;">Bensound</a></label>
+  </div>
+  <footer>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
+  </footer>
+  <script>
+    function createShirtEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("falling-shirt");
+      emoji.innerText = "👕";
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }
+    setInterval(createShirtEmoji, 400);
+    document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?streetwear,urban,design&client_id=eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw')`;
+  </script>
+</body>
+</html><!-- === register.html, contact.html, privacy.html, terms.html === --><!-- Will follow the exact same layout and style; next pages will be prepared now -->

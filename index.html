@@ -1,1 +1,102 @@
-<!DOCTYPE html><html><head><title>Home</title></head><body><h1>Welcome to Edskie Custom Design</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edskie Custom Design</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .banner {
+      text-align: center;
+      margin: 20px;
+    }
+    .banner img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
+    }
+    .falling-shirt {
+      position: fixed;
+      font-size: 20px;
+      animation: fall 10s linear infinite;
+      top: -50px;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #000;
+    }
+    footer a {
+      color: #7cf;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Edskie Custom Design</h1>
+    <p>Custom apparel made for the culture. Designed to connect.</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="profile.html">Profile</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="banner">
+    <img src="https://source.unsplash.com/featured/?graphic,tshirt,design" alt="Dynamic Banner" />
+  </div>
+
+  <footer>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
+  </footer>
+
+  <script>
+    function createShirtEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("falling-shirt");
+      emoji.innerText = "👕";
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }
+    setInterval(createShirtEmoji, 400);
+  </script>
+</body>
+</html>

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,8 +22,6 @@
       justify-content: center;
       gap: 20px;
       padding: 10px 0;
-      z-index: 10;
-      position: relative;
     }
     nav a {
       color: white;
@@ -32,12 +29,11 @@
       font-weight: bold;
     }
     .banner {
-  width: 100%;
-  height: 300px;
-  background-image: url('https://source.unsplash.com/1600x400/?fashion,design,apparel');
-  background-size: cover;
-  background-position: center;
-}
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
     .categories {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -99,7 +95,6 @@
       font-size: 20px;
       animation: fall 10s linear infinite;
       top: -50px;
-      z-index: 0;
     }
     @keyframes fall {
       0% { transform: translateY(-50px) rotate(0deg); }
@@ -111,59 +106,21 @@
   <header>
     <h1>Welcome to Edskie Custom Design</h1>
     <p>Custom apparel made for the culture. Designed to connect.</p>
-  </header>
-
-  <nav>
+  </header>  <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
     <a href="profile.html">Profile</a>
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
-  </nav>
-
-  <div class="banner"></div>
-
-  <section class="categories">
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" 
-        alt="Sarcastic Quotes">
-      <p>For those who prefer wit as cry-at-ais humor.</p>
-    </div>
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?gaming,stream" 
-        alt="Gaming Culture">
-      <p>For the joystick warriors, streamers, and respawners.</p>
-    </div>
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?car,speed" 
-        alt="Car Enthusiasts">
-      <p>For gearheads and speed lovers looking for the next fix.</p>
-    </div>
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?vintage,aesthetic" 
-        alt="Aesthetic Vibes">
-  <p>For fans of all things cozy, retro, and chill.</p>
-    </div>
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?music,guitar" 
-        alt="Music Lovers">
-      <p>For the chord strummers and beat droppers.</p>
-    </div>
-  </section>
-
-  <section class="contact">
+  </nav>  <div id="banner" class="banner"></div>  <section class="categories" id="categories"></section>  <section class="contact">
     <h2>Contact Us</h2>
     <input type="text" placeholder="Name"><br>
     <input type="email" placeholder="Email"><br>
     <button>Send</button>
-  </section>
-
-  <footer>
+  </section>  <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-  </footer>
-
-  <script>
+  </footer>  <script>
     function createShirtEmoji() {
       const emoji = document.createElement("div");
       emoji.classList.add("falling-shirt");
@@ -173,6 +130,41 @@
       setTimeout(() => emoji.remove(), 10000);
     }
     setInterval(createShirtEmoji, 400);
-  </script>
-</body>
+
+    const categories = [
+      { topic: "sarcasm,quotes", label: "Sarcastic Quotes", desc: "For those who prefer wit as cry-at-ais humor." },
+      { topic: "gaming,streamer", label: "Gaming Culture", desc: "For the joystick warriors, streamers, and respawners." },
+      { topic: "car,speed", label: "Car Enthusiasts", desc: "For gearheads and speed lovers looking for the next fix." },
+      { topic: "aesthetic,retro", label: "Aesthetic Vibes", desc: "For fans of all things cozy, retro, and chill." },
+      { topic: "music,guitar", label: "Music Lovers", desc: "For the chord strummers and beat droppers." }
+    ];
+
+    async function fetchImageURL(query) {
+      const key = "eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw";
+      const url = `https://api.unsplash.com/photos/random?query=${query}&orientation=landscape&client_id=${key}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.urls.small;
+    }
+
+    async function loadContent() {
+      const bannerUrl = await fetchImageURL("fashion,design,apparel");
+      document.getElementById("banner").style.backgroundImage = `url('${bannerUrl}')`;
+
+      const section = document.getElementById("categories");
+      for (const cat of categories) {
+        const img = await fetchImageURL(cat.topic);
+        const div = document.createElement("div");
+        div.className = "category";
+        div.innerHTML = `
+          <img src="${img}" alt="${cat.label}" />
+          <h3>${cat.label}</h3>
+          <p>${cat.desc}</p>
+        `;
+        section.appendChild(div);
+      }
+    }
+
+    loadContent();
+  </script></body>
 </html>

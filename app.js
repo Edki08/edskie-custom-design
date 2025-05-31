@@ -1,34 +1,23 @@
-// app.js
+function createShirtEmoji() {
+  const emoji = document.createElement("div");
+  emoji.classList.add("falling-shirt");
+  emoji.innerText = "👕";
 
-// Load background dynamically
-import './background.js';
+  // Start at a random horizontal position
+  emoji.style.left = `${Math.random() * 100}vw`;
 
-// Load continuous music player
-import './music.js';
+  // Random animation duration and speed
+  const duration = 6 + Math.random() * 6; // between 6–12 seconds
+  emoji.style.animationDuration = `${duration}s`;
 
-// Firebase config
-import './firebase-config.js';
+  // Add slight drift using random rotation angle and animation delay
+  emoji.style.animationDelay = `${Math.random() * 3}s`;
+  emoji.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-// Smooth falling shirts
-function createFloatingShirt() {
-  const shirt = document.createElement("div");
-  shirt.classList.add("falling-shirt");
-  shirt.innerText = "👕";
+  document.body.appendChild(emoji);
 
-  // Random horizontal position
-  shirt.style.left = Math.random() * window.innerWidth + "px";
-
-  // Random animation duration and delay
-  const duration = 8 + Math.random() * 5; // 8–13 seconds
-  const delay = Math.random() * 5;
-
-  shirt.style.animation = `fall ${duration}s linear ${delay}s infinite`;
-  shirt.style.opacity = Math.random() * 0.5 + 0.5;
-
-  document.body.appendChild(shirt);
-
-  // Remove after complete fall
-  setTimeout(() => shirt.remove(), (duration + delay) * 1000);
+  // Remove after animation ends
+  setTimeout(() => emoji.remove(), duration * 1000);
 }
 
-setInterval(createFloatingShirt, 500); // More natural interval
+setInterval(createShirtEmoji, 500);

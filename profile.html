@@ -1,28 +1,71 @@
-<!-- Each page includes:
-1. API-generated background
-2. Background music with controls
-3. Falling shirt emoji animation
-4. Nav + Footer --><!-- === profile.html === --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile | Edskie Custom Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Edskie Custom Design</title>
   <style>
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-size: cover; background-position: center; color: white; overflow-x: hidden; }
-    header { background: linear-gradient(90deg, #ff00cc, #3333ff); text-align: center; padding: 20px; }
-    nav { background-color: #000; display: flex; justify-content: center; gap: 20px; padding: 10px 0; }
-    nav a { color: white; text-decoration: none; font-weight: bold; }
-    main { padding: 20px; text-align: center; }
-    .falling-shirt { position: fixed; font-size: 20px; animation: fall 10s linear infinite; top: -50px; }
-    @keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(360deg); } }
-    footer { text-align: center; padding: 10px; background: #000; }
-    footer a { color: #7cf; margin: 0 10px; text-decoration: none; }
-    .music-player { position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 8px; z-index: 1000; }
-    .music-player label { display: block; font-size: 12px; margin-top: 5px; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: white;
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+    }
+    header, footer {
+      text-align: center;
+      background-color: #000;
+      padding: 15px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #111;
+      padding: 10px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .falling-shirt {
+      position: fixed;
+      font-size: 20px;
+      animation: fall 10s linear infinite;
+      top: -50px;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+    .profile-content {
+      padding: 40px;
+      text-align: center;
+    }
+    .music-player {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+      text-align: center;
+    }
+    .music-player audio {
+      width: 200px;
+    }
   </style>
 </head>
 <body>
-  <header><h1>Your Profile</h1><p>Manage your account and preferences.</p></header>
+  <header>
+    <h1>Your Profile</h1>
+    <p>Welcome to your dashboard!</p>
+  </header>
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
@@ -30,19 +73,23 @@
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <main>
-    <h2>Account Settings Coming Soon</h2>
-  </main>
-  <div class="music-player">
-    <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-summer.mp3" autoplay loop></audio>
-    <input type="range" min="0" max="1" step="0.01" value="0.3" onchange="document.getElementById('bgMusic').volume = this.value" />
-    <label>Now Playing: “Summer” by <a href="https://www.bensound.com" target="_blank" style="color: #7cf;">Bensound</a></label>
+  <div class="profile-content">
+    <h2>Username: edskie08</h2>
+    <p>Edit your information, view history, and more.</p>
   </div>
   <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-  </footer>
-  <script>
+  </footer>  <!-- Music Player -->  <div class="music-player">
+    <strong>Now Playing:</strong> Smooth Vibes by LoFiCode<br/>
+    <audio controls loop volume="0.2">
+      <source src="https://cdn.pixabay.com/download/audio/2022/10/27/audio_4f8e7774b8.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div>
+      <a href="https://pixabay.com/music/beats-smooth-vibes-128379/" target="_blank" style="color: #7cf; font-size: 0.8em;">Support the Artist</a>
+    </div>
+  </div>  <!-- Falling Shirts -->  <script>
     function createShirtEmoji() {
       const emoji = document.createElement("div");
       emoji.classList.add("falling-shirt");
@@ -52,7 +99,20 @@
       setTimeout(() => emoji.remove(), 10000);
     }
     setInterval(createShirtEmoji, 400);
-    document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?streetwear,urban,design&client_id=eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw')`;
-  </script>
-</body>
-</html><!-- === register.html, contact.html, privacy.html, terms.html === --><!-- Will follow the exact same layout and style; next pages will be prepared now -->
+
+    // Background image pull
+    async function setBackgroundFromAPI() {
+      const ACCESS_KEY = "eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw";
+      try {
+        const response = await fetch(`https://api.unsplash.com/photos/random?query=design,style,fashion&client_id=${ACCESS_KEY}`);
+        const data = await response.json();
+        if (data && data.urls && data.urls.full) {
+          document.body.style.backgroundImage = `url(${data.urls.full})`;
+        }
+      } catch (error) {
+        console.error("Failed to load background image", error);
+      }
+    }
+    setBackgroundFromAPI();
+  </script></body>
+</html>

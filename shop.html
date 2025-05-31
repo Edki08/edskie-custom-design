@@ -1,12 +1,14 @@
-<!-- Template for Shop Page --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shop | Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Shop - Edskie Custom Design</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="background.js" defer></script>
+  <script src="music.js" defer></script>
 </head>
 <body>
-  <div id="background"></div>
   <header>
     <h1>Shop Our Collection</h1>
   </header>
@@ -17,83 +19,30 @@
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <section class="main-content">
-    <p>Explore our exclusive apparel across all categories.</p>
-  </section>
+
+  <main>
+    <section class="shop">
+      <h2>Featured Products</h2>
+      <div class="product-grid">
+        <div class="product">
+          <img src="https://source.unsplash.com/400x300/?tshirt,design" alt="T-Shirt Design">
+          <h3>Graphic Tee</h3>
+          <p>Bold and unique streetwear design.</p>
+          <button>Buy Now</button>
+        </div>
+        <div class="product">
+          <img src="https://source.unsplash.com/400x300/?hoodie,fashion" alt="Hoodie">
+          <h3>Hoodie Drop</h3>
+          <p>Warm up your look with stylish comfort.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
   </footer>
-  <script src="background.js"></script>
-  <script src="music.js"></script>
-</body>
-</html><!-- Template for Register Page --><!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register | Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="background"></div>
-  <header>
-    <h1>Create Your Account</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="profile.html">Profile</a>
-    <a href="register.html">Register</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <section class="main-content">
-    <form id="registerForm">
-      <input type="text" placeholder="Name" required /><br>
-      <input type="email" placeholder="Email" required /><br>
-      <input type="password" placeholder="Password" required /><br>
-      <button type="submit">Register</button>
-    </form>
-  </section>
-  <footer>
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="terms.html">Terms of Service</a>
-  </footer>
-  <script src="firebase-config.js"></script>
-  <script src="background.js"></script>
-  <script src="music.js"></script>
-</body>
-</html><!-- Template for Contact Page --><!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div id="background"></div>
-  <header>
-    <h1>Get In Touch</h1>
-  </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="profile.html">Profile</a>
-    <a href="register.html">Register</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <section class="main-content">
-    <form action="https://formspree.io/f/xayrwlkn" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required><br>
-      <input type="email" name="email" placeholder="Your Email" required><br>
-      <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-  <footer>
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="terms.html">Terms of Service</a>
-  </footer>
-  <script src="background.js"></script>
-  <script src="music.js"></script>
 </body>
 </html>

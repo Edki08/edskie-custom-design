@@ -1,40 +1,56 @@
-/* General text readability */
-body {
-  position: relative;
-  z-index: 1;
-}
-
-/* Add a dark overlay behind all content */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
-  z-index: -1;
-}
-
-/* Give page layout breathing room */
-header, nav, main, footer, .categories, .contact {
-  padding: 20px;
-}
-
-/* Improve font readability */
-h1, h2, h3, p, a {
-  color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-/* Better nav layout */
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* Center footer text */
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: rgba(0,0,0,0.8);
-}
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edskie Custom Design</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="background.js"></script>
+  <script type="module" src="music.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Edskie Custom Design</h1>
+    <p>Custom apparel made for the culture. Designed to connect.</p>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="profile.html">Profile</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>  <main>
+    <section class="categories">
+      <div class="category">
+        <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
+        <h3>Sarcastic Quotes</h3>
+        <p>For those who prefer wit as cry-at-ais humor.</p>
+      </div>
+      <div class="category">
+        <img src="https://source.unsplash.com/400x300/?gaming,stream" alt="Gaming Culture">
+        <h3>Gaming Culture</h3>
+        <p>For the joystick warriors, streamers, and respawners.</p>
+      </div>
+      <div class="category">
+        <img src="https://source.unsplash.com/400x300/?car,speed" alt="Car Enthusiasts">
+        <h3>Car Enthusiasts</h3>
+        <p>For gearheads and speed lovers looking for the next fix.</p>
+      </div>
+      <div class="category">
+        <img src="https://source.unsplash.com/400x300/?vintage,aesthetic" alt="Aesthetic Vibes">
+        <h3>Aesthetic Vibes</h3>
+        <p>For fans of all things cozy, retro, and chill.</p>
+      </div>
+      <div class="category">
+        <img src="https://source.unsplash.com/400x300/?music,guitar" alt="Music Lovers">
+        <h3>Music Lovers</h3>
+        <p>For the chord strummers and beat droppers.</p>
+      </div>
+    </section>
+  </main>  <footer>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
+    <div id="music-player"></div>
+  </footer>
+</body>
+</html>

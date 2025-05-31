@@ -1,73 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- index.html (Apply same to all pages) --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Edskie Custom Design</title>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-
-  <!-- Your Firebase config file -->
-  <script src="firebase-config.js"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edskie Custom Design</title>
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
+      background-size: cover;
+      background-position: center;
       color: white;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
       text-align: center;
-      padding: 40px;
+      padding: 20px;
     }
-    input, button {
-      padding: 10px;
-      margin: 10px;
-      border: none;
-      border-radius: 5px;
-      width: 80%;
-      max-width: 300px;
+    nav {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0;
     }
-    button {
-      background-color: #3333ff;
+    nav a {
       color: white;
-      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
     }
-    .login-container {
-      background-color: #1a1a1a;
-      padding: 30px;
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #000;
+    }
+    footer a {
+      color: #7cf;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .music-player {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
       border-radius: 10px;
-      display: inline-block;
+      color: #fff;
+      font-size: 14px;
+    }
+    .music-player input[type=range] {
+      width: 100px;
     }
   </style>
 </head>
-
 <body>
-  <h1>Login to Edskie Custom Design</h1>
+  <header>
+    <h1>Welcome to Edskie Custom Design</h1>
+    <p>Custom apparel made for the culture. Designed to connect.</p>
+  </header>  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="profile.html">Profile</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>  <!-- Page content here -->  <footer>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
+  </footer>  <!-- Music Player -->  <div class="music-player">
+    <div><strong>Now Playing:</strong> <span id="track-name">Jazz Hop - ArtistName</span></div>
+    <audio id="background-audio" loop autoplay>
+      <source src="https://example.com/music/jazzhop.mp3" type="audio/mpeg" />
+    </audio>
+    Volume: <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.2">
+    <button onclick="toggleMute()">🔇</button>
+    <div><a href="https://artistpage.com" target="_blank">Support the Artist 🎵</a></div>
+  </div>  <script>
+    // Background API Fetch
+    fetch('https://api.unsplash.com/photos/random?query=graphic+tshirt+design&orientation=landscape&client_id=eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw')
+      .then(response => response.json())
+      .then(data => {
+        document.body.style.backgroundImage = `url(${data.urls.full})`;
+      });
 
-  <div class="login-container">
-    <input type="email" id="email" placeholder="Email" required /><br>
-    <input type="password" id="password" placeholder="Password" required /><br>
-    <button onclick="login()">Login</button>
-    <p id="message"></p>
-  </div>
-
-  <script>
-    const auth = firebase.auth();
-
-    function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          document.getElementById("message").textContent = "✅ Login successful!";
-          // Redirect or continue here
-        })
-        .catch((error) => {
-          document.getElementById("message").textContent = "❌ " + error.message;
-        });
+    // Music Player Logic
+    const audio = document.getElementById('background-audio');
+    const volumeControl = document.getElementById('volume-control');
+    volumeControl.addEventListener('input', () => {
+      audio.volume = volumeControl.value;
+    });
+    function toggleMute() {
+      audio.muted = !audio.muted;
     }
-  </script>
-</body>
+  </script></body>
 </html>

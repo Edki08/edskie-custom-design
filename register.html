@@ -3,74 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register</title>
+  <title>Register - Edskie Custom Design</title>
   <style>
     body {
-      background: #111;
+      background-color: #111;
       color: white;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 60px;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-    input {
-      margin: 10px;
+    h1 {
+      color: #7cf;
+    }
+    input, button {
       padding: 10px;
-      width: 90%;
-      max-width: 300px;
-      border: none;
+      margin: 8px;
+      width: 250px;
       border-radius: 5px;
+      border: none;
     }
     button {
-      padding: 10px 20px;
-      background: #3333ff;
-      border: none;
+      background-color: #3333ff;
       color: white;
-      border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
     #message {
-      margin-top: 15px;
-      color: #7cf;
+      margin-top: 10px;
+      color: #0f0;
     }
   </style>
 </head>
 <body>
-  <h1>Create Account</h1>
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
+  <h1>Register</h1>
+
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
   <button onclick="registerUser()">Register</button>
+
   <div id="message"></div>
 
-  <!-- Firebase SDKs -->
+  <!-- Firebase App (Core SDK) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <!-- Firebase Authentication -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-  <script src="firebase-config.js"></script>
-
+  <!-- Your Firebase Config -->
   <script>
-  const auth = firebase.auth();
+    const firebaseConfig = {
+      apiKey: "AIzaSyBoQ7EFp1D1vpzUzNzzcP9H5ytcuMeOJVs",
+      authDomain: "edskie-custom-design.firebaseapp.com",
+      projectId: "edskie-custom-design",
+      storageBucket: "edskie-custom-design.appspot.com",
+      messagingSenderId: "664794472954",
+      appId: "1:664794472954:web:1cf14f28c738439c488443",
+      measurementId: "G-LG1GT0J7JD"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-  function registerUser() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const messageEl = document.getElementById("message");
+  <!-- Register Script -->
+  <script>
+    const auth = firebase.auth();
 
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    function registerUser() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const messageEl = document.getElementById("message");
 
-        // ✅ Send email verification
-        user.sendEmailVerification().then(() => {
-          messageEl.textContent = "✅ Account created. Check your email to verify!";
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          
+          user.sendEmailVerification().then(() => {
+            messageEl.textContent = "✅ Account created. Check your email to verify!";
+            setTimeout(() => {
+              window.location.href = "login.html";
+            }, 4000);
+          });
+
+        })
+        .catch((error) => {
+          messageEl.style.color = "#f44";
+          messageEl.textContent = "❌ " + error.message;
         });
-
-      })
-      .catch((error) => {
-        messageEl.textContent = "❌ " + error.message;
-      });
-  }
-</script>
-  
+    }
+  </script>
 </body>
 </html>

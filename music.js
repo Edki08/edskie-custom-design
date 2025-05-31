@@ -1,46 +1,73 @@
 // music.js
 const musicTracks = [
   {
-    src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    title: "Dream Journey",
-    artist: "SoundHelix",
-    albumUrl: "https://www.soundhelix.com/audio-examples"
+    name: "Lo-Fi Chill",
+    src: "https://www.bensound.com/bensound-music/bensound-goinghigher.mp3",
+    artist: "Bensound",
+    link: "https://www.bensound.com/royalty-free-music/track/going-higher"
   },
-  // Add more tracks as needed
+  {
+    name: "Ambient Vibe",
+    src: "https://www.bensound.com/bensound-music/bensound-sunny.mp3",
+    artist: "Bensound",
+    link: "https://www.bensound.com/royalty-free-music/track/sunny"
+  }
 ];
 
 let currentTrackIndex = 0;
-const audio = new Audio();
-audio.src = musicTracks[currentTrackIndex].src;
-audio.volume = 0.2;
+
+const audio = new Audio(musicTracks[currentTrackIndex].src);
 audio.loop = true;
-audio.play();
+audio.volume = 0.3;
 
-function createMusicControls() {
-  const controls = document.createElement("div");
-  controls.style.position = "fixed";
-  controls.style.bottom = "10px";
-  controls.style.left = "10px";
-  controls.style.background = "rgba(0, 0, 0, 0.5)";
-  controls.style.padding = "10px";
-  controls.style.borderRadius = "8px";
-  controls.style.color = "white";
-  controls.style.zIndex = 9999;
+window.addEventListener("DOMContentLoaded", () => {
+  const container = document.createElement("div");
+  container.className = "music-player";
 
-  controls.innerHTML = `
-    <p style="margin: 0 0 5px 0;">🎵 <strong>${musicTracks[currentTrackIndex].title}</strong> by ${musicTracks[currentTrackIndex].artist}</p>
-    <a href="${musicTracks[currentTrackIndex].albumUrl}" target="_blank" style="color: #7cf; font-size: 0.9em;">Support this artist</a><br>
-    <label for="volume">🔊 Volume</label>
-    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2" />
-  `;
+  const title = document.createElement("div");
+  title.textContent = `🎵 Now Playing: ${musicTracks[currentTrackIndex].name}`;
+  container.appendChild(title);
 
-  document.body.appendChild(controls);
-
-  const volumeSlider = controls.querySelector("#volume");
-  volumeSlider.addEventListener("input", (e) => {
-    audio.volume = e.target.value;
+  const volumeInput = document.createElement("input");
+  volumeInput.type = "range";
+  volumeInput.min = 0;
+  volumeInput.max = 1;
+  volumeInput.step = 0.01;
+  volumeInput.value = audio.volume;
+  volumeInput.addEventListener("input", () => {
+    audio.volume = volumeInput.value;
   });
-}
+  container.appendChild(volumeInput);
 
-window.addEventListener("DOMContentLoaded", createMusicControls);
+  const link = document.createElement("a");
+  link.href = musicTracks[currentTrackIndex].link;
+  link.target = "_blank";
+  link.textContent = `🎤 Artist: ${musicTracks[currentTrackIndex].artist}`;
+  container.appendChild(link);
 
+  const muteBtn = document.createElement("button");
+  muteBtn.textContent = "🔇";
+  muteBtn.onclick = () => {
+    audio.muted = !audio.muted;
+    muteBtn.textContent = audio.muted ? "🔈" : "🔇";
+  };
+  container.appendChild(muteBtn);
+
+  const genreBtn = document.createElement("button");
+  genreBtn.textContent = "🔁 Switch Genre";
+  genreBtn.onclick = () => {
+    currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+    audio.src = musicTracks[currentTrackIndex].src;
+    audio.play();
+    title.textContent = `🎵 Now Playing: ${musicTracks[currentTrackIndex].name}`;
+    link.href = musicTracks[currentTrackIndex].link;
+    link.textContent = `🎤 Artist: ${musicTracks[currentTrackIndex].artist}`;
+  };
+  container.appendChild(genreBtn);
+
+  document.body.appendChild(container);
+  audio.play().catch(() => {
+    // Some browsers block autoplay
+    console.log("Autoplay blocked. User interaction needed.");
+  });
+});

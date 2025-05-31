@@ -2,55 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile - Edskie Custom Design</title>
+  <script type="module" src="auth-guard.js"></script>
+  <script type="module" src="logout.js"></script>
   <link rel="stylesheet" href="style.css" />
-  <script src="firebase-config.js" defer></script>
   <script src="background.js" defer></script>
   <script src="music.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>Your Profile</h1>
-    <p>Manage your preferences and view order history</p>
-  </header>
-
+  <header><h1>My Profile</h1></header>
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
-    <a href="profile.html">Profile</a>
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
+    <button onclick="logoutUser()">Logout</button>
   </nav>
 
-  <div class="content">
-    <section class="profile-card">
-      <h2>Welcome, User!</h2>
-      <p>Email: <strong>youremail@example.com</strong></p>
-      <p>Member since: <strong>May 2024</strong></p>
-      <button class="edit-btn">Edit Profile</button>
-      <button class="logout-btn">Logout</button>
-    </section>
-
-    <section class="order-history">
-      <h3>Recent Orders</h3>
-      <ul>
-        <li>#1001 - "Sarcastic Quote Tee" - Delivered</li>
-        <li>#1002 - "Retro Vibes Hoodie" - In Transit</li>
-      </ul>
-    </section>
-  </div>
+  <section>
+    <h2>Welcome!</h2>
+    <p>This page is protected by Firebase Authentication.</p>
+  </section>
 
   <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
   </footer>
-
-  <div class="music-widget">
-    <label for="volume">Volume:</label>
-    <input type="range" id="volume" min="0" max="1" step="0.01" />
-    <button onclick="toggleMute()">🔇</button>
-    <small id="track-info"></small>
-  </div>
 </body>
 </html>

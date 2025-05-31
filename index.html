@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +23,8 @@
       justify-content: center;
       gap: 20px;
       padding: 10px 0;
+      z-index: 10;
+      position: relative;
     }
     nav a {
       color: white;
@@ -31,7 +34,7 @@
     .banner {
       width: 100%;
       height: 300px;
-      background-image: url('https://source.unsplash.com/1600x400/?fashion,design,apparel');
+      background-image: url('https://source.unsplash.com/1600x400/?fashion,design,apparel.jpg');
       background-size: cover;
       background-position: center;
     }
@@ -96,6 +99,7 @@
       font-size: 20px;
       animation: fall 10s linear infinite;
       top: -50px;
+      z-index: 0;
     }
     @keyframes fall {
       0% { transform: translateY(-50px) rotate(0deg); }
@@ -108,6 +112,7 @@
     <h1>Welcome to Edskie Custom Design</h1>
     <p>Custom apparel made for the culture. Designed to connect.</p>
   </header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
@@ -115,44 +120,49 @@
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
   </nav>
+
   <div class="banner"></div>
+
   <section class="categories">
     <div class="category">
-      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
+      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes.jpg" alt="Sarcastic Quotes">
       <h3>Sarcastic Quotes</h3>
       <p>For those who prefer wit as cry-at-ais humor.</p>
     </div>
     <div class="category">
-      <img src="https://source.unsplash.com/400x300/?gaming,stream" alt="Gaming Culture">
+      <img src="https://source.unsplash.com/400x300/?gaming,stream.jpg" alt="Gaming Culture">
       <h3>Gaming Culture</h3>
       <p>For the joystick warriors, streamers, and respawners.</p>
     </div>
     <div class="category">
-      <img src="https://source.unsplash.com/400x300/?car,speed" alt="Car Enthusiasts">
+      <img src="https://source.unsplash.com/400x300/?car,speed.jpg" alt="Car Enthusiasts">
       <h3>Car Enthusiasts</h3>
       <p>For gearheads and speed lovers looking for the next fix.</p>
     </div>
     <div class="category">
-      <img src="https://source.unsplash.com/400x300/?vintage,aesthetic" alt="Aesthetic Vibes">
+      <img src="https://source.unsplash.com/400x300/?vintage,aesthetic.jpg" alt="Aesthetic Vibes">
       <h3>Aesthetic Vibes</h3>
       <p>For fans of all things cozy, retro, and chill.</p>
     </div>
     <div class="category">
-      <img src="https://source.unsplash.com/400x300/?music,guitar" alt="Music Lovers">
+      <img src="https://source.unsplash.com/400x300/?music,guitar.jpg" alt="Music Lovers">
       <h3>Music Lovers</h3>
       <p>For the chord strummers and beat droppers.</p>
     </div>
   </section>
+
   <section class="contact">
     <h2>Contact Us</h2>
     <input type="text" placeholder="Name"><br>
     <input type="email" placeholder="Email"><br>
     <button>Send</button>
   </section>
+
   <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
   </footer>
+
   <script>
     function createShirtEmoji() {
       const emoji = document.createElement("div");

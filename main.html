@@ -1,37 +1,57 @@
+<!-- main.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="background.js"></script>
   <script type="module" src="music.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Edskie Custom Design</h1>
-    <p>Custom apparel made for the culture. Designed to connect.</p>
-  </header>
+  <div id="app"></div>
 
-  <nav>
-    <a href="#" onclick="loadPage('home.html')">Home</a>
-    <a href="#" onclick="loadPage('shop.html')">Shop</a>
-    <a href="#" onclick="loadPage('profile.html')">Profile</a>
-    <a href="#" onclick="loadPage('register.html')">Register</a>
-    <a href="#" onclick="loadPage('contact.html')">Contact</a>
-  </nav>
+  <script type="module">
+    // SPA-style loader (loads HTML pages into #app)
+    async function loadPage(page) {
+      const res = await fetch(page);
+      const html = await res.text();
+      document.getElementById('app').innerHTML = html;
 
-  <iframe id="page-frame" src="home.html" style="width: 100%; height: 80vh; border: none;"></iframe>
-
-  <footer>
-    <a href="privacy.html" target="page-frame">Privacy Policy</a> |
-    <a href="terms.html" target="page-frame">Terms of Service</a>
-  </footer>
-
-  <script>
-    function loadPage(page) {
-      document.getElementById("page-frame").src = page;
+      if (window.location.hash !== `#${page}`) {
+        window.location.hash = page;
+      }
     }
+
+    // Default to index.html
+    const defaultPage = 'index.html';
+    const current = window.location.hash.slice(1) || defaultPage;
+    loadPage(current);
+
+    // Link interception
+    window.addEventListener('click', e => {
+      if (e.target.tagName === 'A' && e.target.getAttribute('href').endsWith('.html')) {
+        e.preventDefault();
+        loadPage(e.target.getAttribute('href'));
+      }
+    });
+
+    // Re-load on hash change (browser nav)
+    window.addEventListener('hashchange', () => {
+      loadPage(window.location.hash.slice(1));
+    });
+
+    // Falling Shirts
+    function createShirtEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("falling-shirt");
+      emoji.innerText = "👕";
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 12000);
+    }
+    setInterval(createShirtEmoji, 500);
   </script>
 </body>
 </html>

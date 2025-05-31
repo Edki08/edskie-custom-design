@@ -1,57 +1,87 @@
-// index.html
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edskie Custom Design</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase Config -->
   <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="background.js"></script>
-  <script type="module" src="music.js"></script>
+  <script type="module" src="auth-guard.js"></script>
+
+  <!-- Background + Music -->
+  <script src="background.js" defer></script>
+  <script src="music.js" defer></script>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Welcome to Edskie Custom Design</h1>
     <p>Custom apparel made for the culture. Designed to connect.</p>
   </header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
     <a href="profile.html">Profile</a>
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
-  </nav>  <main>
-    <section class="categories">
-      <div class="category">
-        <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
-        <h3>Sarcastic Quotes</h3>
-        <p>For those who prefer wit as cry-at-ais humor.</p>
-      </div>
-      <div class="category">
-        <img src="https://source.unsplash.com/400x300/?gaming,stream" alt="Gaming Culture">
-        <h3>Gaming Culture</h3>
-        <p>For the joystick warriors, streamers, and respawners.</p>
-      </div>
-      <div class="category">
-        <img src="https://source.unsplash.com/400x300/?car,speed" alt="Car Enthusiasts">
-        <h3>Car Enthusiasts</h3>
-        <p>For gearheads and speed lovers looking for the next fix.</p>
-      </div>
-      <div class="category">
-        <img src="https://source.unsplash.com/400x300/?vintage,aesthetic" alt="Aesthetic Vibes">
-        <h3>Aesthetic Vibes</h3>
-        <p>For fans of all things cozy, retro, and chill.</p>
-      </div>
-      <div class="category">
-        <img src="https://source.unsplash.com/400x300/?music,guitar" alt="Music Lovers">
-        <h3>Music Lovers</h3>
-        <p>For the chord strummers and beat droppers.</p>
-      </div>
-    </section>
-  </main>  <footer>
+  </nav>
+
+  <section class="categories">
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
+      <h3>Sarcastic Quotes</h3>
+      <p>For those who prefer wit as cry-at-ais humor.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?gaming,stream" alt="Gaming Culture">
+      <h3>Gaming Culture</h3>
+      <p>For the joystick warriors, streamers, and respawners.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?car,speed" alt="Car Enthusiasts">
+      <h3>Car Enthusiasts</h3>
+      <p>For gearheads and speed lovers looking for the next fix.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?vintage,aesthetic" alt="Aesthetic Vibes">
+      <h3>Aesthetic Vibes</h3>
+      <p>For fans of all things cozy, retro, and chill.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?music,guitar" alt="Music Lovers">
+      <h3>Music Lovers</h3>
+      <p>For the chord strummers and beat droppers.</p>
+    </div>
+  </section>
+
+  <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-    <div id="music-player"></div>
   </footer>
+
+  <!-- Music Player Overlay -->
+  <div class="music-player">
+    <div>🎵 <strong>Dream Journey</strong> by SoundHelix</div>
+    <a href="https://www.soundhelix.com" target="_blank">Support this artist</a>
+    <label for="volume">🔊 Volume</label>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2" />
+    <audio id="background-music" autoplay loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    // Volume Control
+    const music = document.getElementById('background-music');
+    const volume = document.getElementById('volume');
+    music.volume = volume.value;
+    volume.addEventListener('input', () => {
+      music.volume = volume.value;
+    });
+  </script>
 </body>
 </html>

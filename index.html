@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edskie Custom Design</title>
-
-  <!-- Firebase Config -->
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="auth-guard.js"></script>
-
-  <!-- Background + Music -->
-  <script src="background.js" defer></script>
-  <script src="music.js" defer></script>
-
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Dynamic background and music -->
+  <script type="module" src="background.js"></script>
+  <script type="module" src="music.js"></script>
 </head>
 <body>
   <header>
@@ -61,27 +56,5 @@
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
   </footer>
-
-  <!-- Music Player Overlay -->
-  <div class="music-player">
-    <div>🎵 <strong>Dream Journey</strong> by SoundHelix</div>
-    <a href="https://www.soundhelix.com" target="_blank">Support this artist</a>
-    <label for="volume">🔊 Volume</label>
-    <input type="range" id="volume" min="0" max="1" step="0.01" value="0.2" />
-    <audio id="background-music" autoplay loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-  </div>
-
-  <script>
-    // Volume Control
-    const music = document.getElementById('background-music');
-    const volume = document.getElementById('volume');
-    music.volume = volume.value;
-    volume.addEventListener('input', () => {
-      music.volume = volume.value;
-    });
-  </script>
 </body>
 </html>

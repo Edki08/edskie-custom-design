@@ -10,6 +10,8 @@
       background-color: #111;
       color: white;
       overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
     }
     header {
       background: linear-gradient(90deg, #ff00cc, #3333ff);
@@ -29,66 +31,8 @@
       font-weight: bold;
     }
     .banner {
-      width: 100%;
-      height: 300px;
-      background-size: cover;
-      background-position: center;
-    }
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .category {
-      background-color: #222;
-      border-radius: 8px;
-      overflow: hidden;
       text-align: center;
-    }
-    .category img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-    .category h3 {
-      margin: 10px 0 5px;
-    }
-    .category p {
-      font-size: 0.9em;
-      color: #ccc;
-      padding: 0 10px 10px;
-    }
-    .contact {
-      background-color: #1a1a1a;
-      padding: 20px;
-      text-align: center;
-    }
-    .contact input {
-      padding: 10px;
-      width: 80%;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-    }
-    .contact button {
-      padding: 10px 20px;
-      background: #3333ff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #000;
-    }
-    footer a {
-      color: #7cf;
-      margin: 0 10px;
-      text-decoration: none;
+      margin: 20px;
     }
     .falling-shirt {
       position: fixed;
@@ -100,27 +44,55 @@
       0% { transform: translateY(-50px) rotate(0deg); }
       100% { transform: translateY(100vh) rotate(360deg); }
     }
+    .music-controls {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
+    }
+    .music-controls input[type=range] {
+      width: 100px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #000;
+    }
+    footer a {
+      color: #7cf;
+      margin: 0 10px;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Welcome to Edskie Custom Design</h1>
     <p>Custom apparel made for the culture. Designed to connect.</p>
-  </header>  <nav>
+  </header>
+  <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
     <a href="profile.html">Profile</a>
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
-  </nav>  <div id="banner" class="banner"></div>  <section class="categories" id="categories"></section>  <section class="contact">
-    <h2>Contact Us</h2>
-    <input type="text" placeholder="Name"><br>
-    <input type="email" placeholder="Email"><br>
-    <button>Send</button>
-  </section>  <footer>
+  </nav>  <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-  </footer>  <script>
+  </footer>  <div class="music-controls">
+    <div><strong>Now Playing:</strong> Lofi Chill – <a href="https://chillhop.com" target="_blank" style="color:#7cf">Visit Album</a></div>
+    <audio id="bg-music" src="https://cdn.pixabay.com/audio/2022/03/15/audio_4092970f27.mp3" autoplay loop></audio>
+    Volume: <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.2">
+    <button onclick="toggleMute()">🔇</button>
+  </div>  <script>
+    // Dynamic Background API
+    document.body.style.backgroundImage = `url('https://api.unsplash.com/photos/random?query=graphic,streetwear&client_id=eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw')`;
+
+    // Falling T-shirts
     function createShirtEmoji() {
       const emoji = document.createElement("div");
       emoji.classList.add("falling-shirt");
@@ -131,40 +103,12 @@
     }
     setInterval(createShirtEmoji, 400);
 
-    const categories = [
-      { topic: "sarcasm,quotes", label: "Sarcastic Quotes", desc: "For those who prefer wit as cry-at-ais humor." },
-      { topic: "gaming,streamer", label: "Gaming Culture", desc: "For the joystick warriors, streamers, and respawners." },
-      { topic: "car,speed", label: "Car Enthusiasts", desc: "For gearheads and speed lovers looking for the next fix." },
-      { topic: "aesthetic,retro", label: "Aesthetic Vibes", desc: "For fans of all things cozy, retro, and chill." },
-      { topic: "music,guitar", label: "Music Lovers", desc: "For the chord strummers and beat droppers." }
-    ];
-
-    async function fetchImageURL(query) {
-      const key = "eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw";
-      const url = `https://api.unsplash.com/photos/random?query=${query}&orientation=landscape&client_id=${key}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      return data.urls.small;
+    // Music Controls
+    const music = document.getElementById("bg-music");
+    const slider = document.getElementById("volume-slider");
+    slider.addEventListener("input", () => music.volume = slider.value);
+    function toggleMute() {
+      music.muted = !music.muted;
     }
-
-    async function loadContent() {
-      const bannerUrl = await fetchImageURL("fashion,design,apparel");
-      document.getElementById("banner").style.backgroundImage = `url('${bannerUrl}')`;
-
-      const section = document.getElementById("categories");
-      for (const cat of categories) {
-        const img = await fetchImageURL(cat.topic);
-        const div = document.createElement("div");
-        div.className = "category";
-        div.innerHTML = `
-          <img src="${img}" alt="${cat.label}" />
-          <h3>${cat.label}</h3>
-          <p>${cat.desc}</p>
-        `;
-        section.appendChild(div);
-      }
-    }
-
-    loadContent();
   </script></body>
 </html>

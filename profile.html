@@ -1,110 +1,56 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edskie Custom Design - Profile</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
-      color: white;
-      overflow-x: hidden;
-      background-size: cover;
-      background-position: center;
-    }
-    header {
-      background: linear-gradient(90deg, #ff00cc, #3333ff);
-      text-align: center;
-      padding: 20px;
-    }
-    nav {
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 10px 0;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .profile {
-      text-align: center;
-      padding: 40px 20px;
-    }
-    .music-player {
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 20px auto;
-      max-width: 600px;
-      border-radius: 10px;
-    }
-    .falling-shirt {
-      position: fixed;
-      font-size: 20px;
-      animation: fall 10s linear infinite;
-      top: -50px;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-50px) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #000;
-    }
-    footer a {
-      color: #7cf;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-  </style>
+  <title>Profile - Edskie Custom Design</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="firebase-config.js" defer></script>
+  <script src="background.js" defer></script>
+  <script src="music.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>Welcome, Dog Parent!</h1>
-    <p>Your personalized profile space.</p>
+    <h1>Your Profile</h1>
+    <p>Manage your preferences and view order history</p>
   </header>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="shop.html">Shop</a>
     <a href="profile.html">Profile</a>
     <a href="register.html">Register</a>
     <a href="contact.html">Contact</a>
-  </nav>  <div class="profile">
-    <h2>Your Profile Overview</h2>
-    <p>Manage your account, preferences, and more here.</p>
-  </div>  <div class="music-player">
-    <h3>Now Playing: "Lost in Chill" by DJ Tempo</h3>
-    <audio controls autoplay loop volume="0.3">
-      <source src="https://www.bensound.com/bensound-music/bensound-goinghigher.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-    <p style="font-size: 0.9em; color: #aaa;">Music by <a href="https://www.bensound.com" target="_blank" style="color: #7cf;">Bensound.com</a> — Support the artist by <a href="https://www.bensound.com/royalty-free-music/track/going-higher" target="_blank" style="color: #7cf;">purchasing their album</a>.</p>
-  </div>  <footer>
+  </nav>
+
+  <div class="content">
+    <section class="profile-card">
+      <h2>Welcome, User!</h2>
+      <p>Email: <strong>youremail@example.com</strong></p>
+      <p>Member since: <strong>May 2024</strong></p>
+      <button class="edit-btn">Edit Profile</button>
+      <button class="logout-btn">Logout</button>
+    </section>
+
+    <section class="order-history">
+      <h3>Recent Orders</h3>
+      <ul>
+        <li>#1001 - "Sarcastic Quote Tee" - Delivered</li>
+        <li>#1002 - "Retro Vibes Hoodie" - In Transit</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer>
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Service</a>
-  </footer>  <script>
-    function createShirtEmoji() {
-      const emoji = document.createElement("div");
-      emoji.classList.add("falling-shirt");
-      emoji.innerText = "👕";
-      emoji.style.left = Math.random() * window.innerWidth + "px";
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 10000);
-    }
-    setInterval(createShirtEmoji, 400);
+  </footer>
 
-    // Fetch dynamic background from Unsplash API
-    fetch("https://api.unsplash.com/photos/random?query=fashion&client_id=eV273GPF1rVF3NNrcidPzIu2qN1XIkW21O8OouuZFEw")
-      .then(res => res.json())
-      .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.full})`;
-      })
-      .catch(err => console.error("Background load error:", err));
-  </script></body>
+  <div class="music-widget">
+    <label for="volume">Volume:</label>
+    <input type="range" id="volume" min="0" max="1" step="0.01" />
+    <button onclick="toggleMute()">🔇</button>
+    <small id="track-info"></small>
+  </div>
+</body>
 </html>

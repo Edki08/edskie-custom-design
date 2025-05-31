@@ -1,67 +1,51 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edskie Custom Design</title>
   <link rel="stylesheet" href="style.css" />
+  <script type="module" src="firebase-config.js"></script>
   <script type="module" src="background.js"></script>
   <script type="module" src="music.js"></script>
-  <style>
-    .falling-shirt {
-      position: fixed;
-      top: -40px;
-      font-size: 24px;
-      animation: shirtFall linear infinite;
-      z-index: 999;
-    }@keyframes shirtFall {
-  0% {
-    transform: translateY(-50px) rotate(0deg);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0.2;
-  }
-}
-
-  </style>
+  <script type="module" src="app.js"></script>
   <script>
     function createShirtEmoji() {
       const emoji = document.createElement("div");
       emoji.classList.add("falling-shirt");
       emoji.innerText = "👕";
       emoji.style.left = Math.random() * window.innerWidth + "px";
-      emoji.style.animationDuration = (8 + Math.random() * 5) + "s";
       document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 13000);
+      setTimeout(() => emoji.remove(), 10000);
     }
-    setInterval(createShirtEmoji, 400);
+    setInterval(createShirtEmoji, 600);
   </script>
 </head>
 <body>
-  <iframe src="music.html" id="musicFrame" style="display:none;"></iframe>
   <header>
     <h1>Welcome to Edskie Custom Design</h1>
     <p>Custom apparel made for the culture. Designed to connect.</p>
   </header>
+
   <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="profile.html">Profile</a>
-    <a href="register.html">Register</a>
-    <a href="contact.html">Contact</a>
+    <a href="#" data-page="index.html">Home</a>
+    <a href="#" data-page="shop.html">Shop</a>
+    <a href="#" data-page="profile.html">Profile</a>
+    <a href="#" data-page="register.html">Register</a>
+    <a href="#" data-page="contact.html">Contact</a>
+    <a href="#" data-page="login.html">Login</a>
   </nav>
-  <main class="categories">
-    <div class="category">
-      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
-      <h3>Sarcastic Quotes</h3>
-      <p>For those who prefer wit as cry-at-ais humor.</p>
-    </div>
-    <!-- More categories here -->
+
+  <main id="content">
+    <!-- Page content will load here -->
   </main>
+
+  <div class="music-player" id="musicPlayer"></div>
+
   <footer>
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="terms.html">Terms of Service</a>
+    <a href="#" data-page="privacy.html">Privacy Policy</a> |
+    <a href="#" data-page="terms.html">Terms of Service</a>
   </footer>
 </body>
 </html>
+

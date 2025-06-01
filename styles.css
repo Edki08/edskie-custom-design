@@ -108,22 +108,23 @@ footer a {
 .falling-shirt {
   position: fixed;
   top: -50px;
-  font-size: 24px;
-  animation: fall linear infinite;
+  left: 0;
   z-index: 999;
   pointer-events: none;
-  opacity: 0.85;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 @keyframes fall {
-  0% {
-    transform: translateY(-50px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-50px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0.3; }
+}
+
+@keyframes sway {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(50px); }
+  100% { transform: translateX(-50px); }
 }
 
 .music-player {

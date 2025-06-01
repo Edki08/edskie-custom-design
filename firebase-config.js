@@ -1,1 +1,1 @@
-// firebase-config.js content goes here
+// Final firebase-config.js content here

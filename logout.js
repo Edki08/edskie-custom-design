@@ -1,1 +1,1 @@
-// logout.js content goes here
+// Final logout.js content here

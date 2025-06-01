@@ -5,20 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edskie Custom Design</title>
   <link rel="stylesheet" href="style.css" />
-  <script type="module" src="firebase-config.js"></script>
   <script type="module" src="background.js"></script>
   <script type="module" src="music.js"></script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="auth-guard.js"></script>
   <script>
     function createShirtEmoji() {
       const emoji = document.createElement("div");
       emoji.classList.add("falling-shirt");
       emoji.innerText = "👕";
-      emoji.style.left = Math.random() * window.innerWidth + "px";
+
+      const startLeft = Math.random() * window.innerWidth;
+      const size = Math.random() * 20 + 15;
+      const duration = Math.random() * 5 + 5;
+      const delay = Math.random() * 5;
+
+      emoji.style.left = `${startLeft}px`;
+      emoji.style.fontSize = `${size}px`;
+      emoji.style.animationDuration = `${duration}s`;
+      emoji.style.animationDelay = `${delay}s`;
+
       document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 10000);
+
+      setTimeout(() => {
+        emoji.remove();
+      }, (duration + delay) * 1000);
     }
-    setInterval(createShirtEmoji, 600);
+
+    setInterval(createShirtEmoji, 400);
   </script>
 </head>
 <body>
@@ -28,23 +41,54 @@
   </header>
 
   <nav>
-    <a href="#" data-page="index.html">Home</a>
-    <a href="#" data-page="shop.html">Shop</a>
-    <a href="#" data-page="profile.html">Profile</a>
-    <a href="#" data-page="register.html">Register</a>
-    <a href="#" data-page="contact.html">Contact</a>
-    <a href="#" data-page="login.html">Login</a>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="profile.html">Profile</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
   </nav>
 
-  <main id="content">
-    <!-- Page content will load here -->
+  <main class="categories">
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?sarcasm,quotes" alt="Sarcastic Quotes">
+      <h3>Sarcastic Quotes</h3>
+      <p>For those who prefer wit as cry-at-ais humor.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?gaming,stream" alt="Gaming Culture">
+      <h3>Gaming Culture</h3>
+      <p>For the joystick warriors, streamers, and respawners.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?car,speed" alt="Car Enthusiasts">
+      <h3>Car Enthusiasts</h3>
+      <p>For gearheads and speed lovers looking for the next fix.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?aesthetic,vibes" alt="Aesthetic Vibes">
+      <h3>Aesthetic Vibes</h3>
+      <p>For fans of all things cozy, retro, and chill.</p>
+    </div>
+    <div class="category">
+      <img src="https://source.unsplash.com/400x300/?music,guitar" alt="Music Lovers">
+      <h3>Music Lovers</h3>
+      <p>For the chord strummers and beat droppers.</p>
+    </div>
   </main>
 
-  <div class="music-player" id="musicPlayer"></div>
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <input type="text" placeholder="Name"><br>
+    <input type="email" placeholder="Email"><br>
+    <button>Send</button>
+  </section>
 
   <footer>
-    <a href="#" data-page="privacy.html">Privacy Policy</a> |
-    <a href="#" data-page="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Service</a>
   </footer>
+
+  <div class="music-player" id="musicPlayer"></div>
 </body>
 </html>

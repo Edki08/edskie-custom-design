@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+header {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  text-align: center;
+  padding: 20px;
+}
+nav {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+  flex-wrap: wrap;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.category {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+.category img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+.category h3 {
+  margin: 10px 0 5px;
+}
+.category p {
+  font-size: 0.9em;
+  color: #ccc;
+  padding: 0 10px 10px;
+}
+footer {
+  text-align: center;
+  padding: 10px;
+  background: #000;
+}
+footer a {
+  color: #7cf;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.falling-shirt {
+  position: fixed;
+  font-size: 20px;
+  animation: fall linear infinite;
+  top: -50px;
+  z-index: 999;
+}
+@keyframes fall {
+  0% { transform: translateY(-50px) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}

@@ -8,18 +8,19 @@
   <script type="module" src="background.js"></script>
   <script type="module" src="music.js"></script>
   <script>
-    function createShirtEmoji() {
-      const emoji = document.createElement("div");
-      emoji.classList.add("falling-shirt");
-      emoji.innerText = "👕";
-      emoji.style.left = Math.random() * window.innerWidth + "px";
-      emoji.style.animationDuration = (10 + Math.random() * 10) + "s";
-      emoji.style.fontSize = (16 + Math.random() * 16) + "px";
-      document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 20000);
-    }
-    setInterval(createShirtEmoji, 500);
-  </script>
+  function createShirtEmoji() {
+    const emoji = document.createElement("div");
+    emoji.classList.add("falling-shirt");
+    emoji.innerText = "👕";
+    emoji.style.left = Math.random() * window.innerWidth + "px";
+    emoji.style.animationDuration = `${8 + Math.random() * 10}s, ${3 + Math.random() * 2}s`;
+    emoji.style.fontSize = `${16 + Math.random() * 20}px`;
+    document.body.appendChild(emoji);
+    setTimeout(() => emoji.remove(), 20000);
+  }
+
+  setInterval(createShirtEmoji, 400);
+</script>
 </head>
 <body>
   <header>

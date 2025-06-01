@@ -1,4 +1,5 @@
 /* style.css */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -8,24 +9,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* dark overlay */
-  z-index: 0;
-}
-
-/* ensure all content sits above overlay */
-* {
-  position: relative;
-  z-index: 1;
 }
 
 header {
@@ -74,7 +57,6 @@ nav a {
 
 .category h3 {
   margin: 10px 0 5px;
-  color: #fff;
 }
 
 .category p {
@@ -83,8 +65,7 @@ nav a {
   padding: 0 10px 10px;
 }
 
-.contact,
-.auth-section {
+.contact, .auth-section {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 20px;
   text-align: center;
@@ -94,8 +75,7 @@ nav a {
   backdrop-filter: blur(6px);
 }
 
-.contact input,
-.auth-section input {
+.contact input, .auth-section input {
   padding: 10px;
   width: 90%;
   margin: 10px 0;
@@ -103,8 +83,7 @@ nav a {
   border-radius: 5px;
 }
 
-.contact button,
-.auth-section button {
+.contact button, .auth-section button {
   padding: 10px 20px;
   background: #3333ff;
   color: white;
@@ -130,12 +109,10 @@ footer a {
   position: fixed;
   top: -50px;
   font-size: 24px;
+  animation: fall linear infinite;
   z-index: 999;
   pointer-events: none;
-  animation-name: fall, drift;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
+  opacity: 0.85;
 }
 
 @keyframes fall {
@@ -144,15 +121,9 @@ footer a {
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) rotate(360deg);
+    transform: translateY(110vh) rotate(360deg);
     opacity: 0;
   }
-}
-
-@keyframes drift {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(20px); }
-  100% { transform: translateX(-20px); }
 }
 
 .music-player {

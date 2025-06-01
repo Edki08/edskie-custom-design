@@ -1,1 +1,1 @@
-// Final background.js content here
+<!-- background.js content here -->

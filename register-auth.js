@@ -1,1 +1,1 @@
-// Final register-auth.js content here
+<!-- register-auth.js content here -->

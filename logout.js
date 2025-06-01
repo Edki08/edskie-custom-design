@@ -1,1 +1,1 @@
-// Final logout.js content here
+<!-- logout.js content here -->

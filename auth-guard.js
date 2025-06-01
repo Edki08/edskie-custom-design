@@ -1,1 +1,1 @@
-// Final auth-guard.js content here
+<!-- auth-guard.js content here -->
